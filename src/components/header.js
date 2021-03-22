@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import Button from './button';
+import { useLocation } from 'react-router-dom';
 
 const Header = ({ title, showAddTask, setShowAddTask }) => {
+    const location = useLocation();
 
     const onClick = () => {
         setShowAddTask(!showAddTask);
@@ -10,10 +12,10 @@ const Header = ({ title, showAddTask, setShowAddTask }) => {
     return (
         <header className='header'>
             <h1>{title}</h1>
-            <Button
+            {location.pathname === '/' && (<Button
                 text={showAddTask ? 'Hide' : 'Show'}
                 onClick={onClick}
-            />
+            />)}
         </header>
     )
 }
