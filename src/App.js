@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Header from './components/header';
 import Tasks from './components/tasks';
 import './styles/app.css';
+import AddTask from './components/addTask';
 
 const App = () => {
     const [tasks, setTasks] = useState([
@@ -39,6 +40,7 @@ const App = () => {
     return (
         <div>
             <Header />
+            <AddTask />
             {tasks.length > 0 ?
                 <Tasks
                     tasks={tasks}
