@@ -5,6 +5,7 @@ import './styles/app.css';
 import AddTask from './components/addTask';
 
 const App = () => {
+    const [showAddTask, setShowAddTask] = useState(false);
     const [tasks, setTasks] = useState([
         {
             id: 1,
@@ -25,6 +26,14 @@ const App = () => {
             reminder: false
         }
     ]);
+
+    // Add Task
+    const addTask = (task) => {
+        const id = Math.floor(Math.random() * 10000 + 1);
+        const newTask = { ...task, id };
+        setTasks([...tasks, newTask]);
+    }
+
     // Delete Task
     const deleteTask = (id) => {
         setTasks(tasks.filter(el => el.id !== id));
@@ -33,14 +42,17 @@ const App = () => {
     // Toggle Reminder
     const toggleReminder = (id) => {
         setTasks(tasks.map(el => {
-            return el.id === id ? {...el, reminder: !el.reminder} : el
+            return el.id === id ? { ...el, reminder: !el.reminder } : el
         }));
     }
 
     return (
         <div>
-            <Header />
-            <AddTask />
+            <Header
+                showAddTask={showAddTask}
+                setShowAddTask={setShowAddTask}
+            />
+            {showAddTask && <AddTask onAdd={addTask} />}
             {tasks.length > 0 ?
                 <Tasks
                     tasks={tasks}
